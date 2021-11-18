@@ -48,6 +48,8 @@
 
 ;;; Test All
 ;;; Runs all individual test cases
+;;; Returns a list with an element for each test run.
+;;; Each element will be a 1 or 0. 1 signifies failure, 0 signifies success.
 (define test-before-seq
   (λ ()
     (list (test1-before-seq)

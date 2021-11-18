@@ -1,5 +1,8 @@
 #lang mzscheme
 
+(define before-seq
+  (λ (xs ys)
+    (if (null? xs) ys)))
 
 ;;; Individual Tests for Q1
 
@@ -11,7 +14,6 @@
       (cond
         ((equal? (before-seq '(a b) '(x y z 1 2 3 4 a b c d a a b)) '(z 4 a)) 0)
         (else 1))))
-
 
 
 ;;; Test 2
@@ -32,3 +34,23 @@
       (cond
         ((equal? (before-seq '() '(j k l m n)) '(j k l m n)) 0)
         (else 1))))
+
+
+;;; Test 4
+;;; Given '(t) & '(a b t u v t t)
+;;; Returns 0 if correctly evaluated to '(b v t)
+(define test4-before-seq
+  (λ ()
+      (cond
+        ((equal? (before-seq '(t) '(a b t u v t t)) '(b v t)) 0)
+        (else 1))))
+
+
+;;; Test All
+;;; Runs all individual test cases
+(define test-before-seq
+  (λ ()
+    (list (test1-before-seq)
+          (test2-before-seq)
+          (test3-before-seq)
+          (test4-before-seq))))

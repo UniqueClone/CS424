@@ -1,8 +1,11 @@
 #lang mzscheme
 
+
+;;; PART 1 - before-seq
 (define before-seq
   (λ (xs ys)
-    (if (null? xs) ys)))
+    (cond ((null? xs) ys))))
+    
 
 ;;; Individual Tests for Q1
 
@@ -46,7 +49,7 @@
         (else 1))))
 
 
-;;; Test All
+;;; Test All before-seq
 ;;; Runs all individual test cases
 ;;; Returns a list with an element for each test run.
 ;;; Each element will be a 1 or 0. 1 signifies failure, 0 signifies success.
@@ -56,3 +59,26 @@
           (test2-before-seq)
           (test3-before-seq)
           (test4-before-seq))))
+
+
+;;; PART 2 - ddx
+(define ddx
+  (λ (e)
+    (if (number? e)
+        0
+        (if (equal? e 'x)
+            1
+            (if (equal? (car e) '+)
+                (list '+
+                      (ddx (cadr e))
+                      (ddx (caddr e)))
+                (if (equal? (car e) '*)
+                    (list '+
+                          (list '*
+                                (cadr e)
+                                (ddx (caddr e)))
+                          (list '*
+                                (ddx (cadr e))
+                                (caddr e)))
+                    (error 'oops)))))))
+

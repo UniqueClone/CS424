@@ -82,3 +82,16 @@
                                 (caddr e)))
                     (error 'oops)))))))
 
+;;; Test 1
+(define test1-ddx
+  (λ ()
+    (cond
+      ((equal? (ddx 'x) 1) 0)
+      (else 1))))
+
+;;; Test 2
+(define test2-ddx
+  (λ ()
+    (cond
+      ((equal? (ddx '(+ (* x 3) x)) '(+ (+ (* x 0) (* 1 3)) 1)) 0)
+      (else 1))))

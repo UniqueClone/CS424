@@ -95,3 +95,27 @@
     (cond
       ((equal? (ddx '(+ (* x 3) x)) '(+ (+ (* x 0) (* 1 3)) 1)) 0)
       (else 1))))
+
+
+;;; PART 3 - grovel-add
+
+
+;;; Test 1
+(define test1-grovel-add
+  (λ ()
+   (cond
+     ((equal? (grovel-add (λ (x) #t) '(a b (5 x y (z 2)))) 7) 0)
+     (else 1))))
+
+;;; Test 2
+(define test2-grovel-add
+  (λ ()
+   (cond
+     ((equal? (grovel-add (λ (x) (< x 4)) '(a b (5 x y (z 2)))) 2) 0)
+     (else 1))))
+
+;;; Test All grovel-add
+(define test-grovel-add
+  (λ ()
+    (list (test1-grovel-add)
+          (test2-grovel-add))))

@@ -97,8 +97,18 @@
       (else 1))))
 
 
-;;; PART 3 - grovel-add
-
+;;; PART 5 - grovel-add
+(define grovel-add
+  (λ (xs ys)
+    (if (list? ys)
+        (if (equal? ys '())
+            0
+            (cond
+              ((list? (car ys)) (+ (grovel-add xs (car ys)) (grovel-add xs (cdr ys))))
+              ((number? (car ys)) (+ (if (xs (car ys))
+                                      (car ys)
+                                      0) (grovel-add xs (cdr ys))))
+              (else (grovel-add xs (cdr ys))))))))
 
 ;;; Test 1
 (define test1-grovel-add

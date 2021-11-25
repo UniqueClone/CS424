@@ -4,18 +4,33 @@
 ;;; PART 1 - before-seq
 (define before-seq
   (λ (xs ys)
-    (cond ((null? xs) ys))))
+    (cond
+      ((null? xs) ys)
+      ((null? ys) '())
+      ((null? (cdr ys)) '())
+      ((equal? (car xs) (cadr ys)) (if (before-seq-2 (cdr xs) (cddr ys))
+                                       (cons (car ys) (before-seq xs (cdr ys)))
+                                       (before-seq xs (cdr ys))))
+      (else (before-seq xs (cdr ys))))))
+
+(define before-seq-2
+  (λ (as bs)
+    (cond
+      ((null? as) #t)
+      ((null? bs) #f)
+      ((equal? (car as) (car bs)) (before-seq-2 (cdr as) (cdr bs)))
+      (else #f))))
     
 
 ;;; Individual Tests for Q1
 
 ;;; Test 1
-;;; Given '(a b) & '(x y z 1 2 3 4 a b c d a a b)
+;;; Given '(a b) & '(x y z a b 1 2 3 4 a b c d a a b)
 ;;; Returns 0 if correctly evaluated to '(z 4 a)
 (define test1-before-seq
   (λ ()
       (cond
-        ((equal? (before-seq '(a b) '(x y z 1 2 3 4 a b c d a a b)) '(z 4 a)) 0)
+        ((equal? (before-seq '(a b) '(x y z a b 1 2 3 4 a b c d a a b)) '(z 4 a)) 0)
         (else 1))))
 
 

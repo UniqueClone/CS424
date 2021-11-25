@@ -97,6 +97,21 @@
       (else 1))))
 
 
+;;; PART 3 - f to cf
+(define f
+  (λ (n)
+    (cond ((= n 0) 1)
+	      ((= n 1) 1)
+		  (else (+ (f (- n 1)) (f (- n 2)))))))
+
+(define c-ify2 (λ (f) (λ (c x y) (c (f x y)))))
+
+(define c= (c-ify2 =))
+(define c+ (c-ify2 +))
+(define c- (c-ify2 -))
+
+
+
 ;;; PART 5 - grovel-add
 (define grovel-add
   (λ (f xs)

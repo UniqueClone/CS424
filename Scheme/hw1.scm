@@ -134,14 +134,14 @@
         1)))
 
 ;;; Test 2
-(define test1-cf
+(define test2-cf
   (λ ()
     (if (equal? (f 10) (cf 10))
         0
         1)))
 
 ;;; Test 3
-(define test1-cf
+(define test3-cf
   (λ ()
     (if (equal? (f 25) (cf 25))
         0

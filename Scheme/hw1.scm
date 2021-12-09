@@ -76,6 +76,23 @@
           (test4-before-seq))))
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;;; PART 2 - ddx
 (define ddx
   (λ (e)
@@ -112,6 +129,20 @@
       (else 1))))
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;;; PART 3 - f to cf
 (define f
   (λ (n)
@@ -119,31 +150,54 @@
 	      ((= n 1) 1)
 		  (else (+ (f (- n 1)) (f (- n 2)))))))
 
+
 (define c-ify2 (λ (f) (λ (c x y) (c (f x y)))))
 
 (define c= (c-ify2 =))
 (define c+ (c-ify2 +))
 (define c- (c-ify2 -))
 
+(define c* (c-ify2 *))
+
+(define cf
+  (λ (c n)
+    (c= (λ (nez)
+          (if nez
+              (c 1)
+              (c= (λ (ne1)
+                    (if ne1
+                        (c 1)
+                        (c- (λ (nm1)
+                              (cf (λ (fnm1)
+                                           (c- (λ (nm2)
+                                               (cf (λ (fnm2)
+                                                       (c+ c fnm1 fnm2))
+                                                     nm2))
+                                            n 2))
+                                    nm1))
+                            n 1)))
+                   n 1)))
+       n 0)))
+
 
 ;;; Test 1
 (define test1-cf
   (λ ()
-    (if (equal? (f 5) (cf 5))
+    (if (equal? (f 5) (cf (λ (x) x) 5))
         0
         1)))
 
 ;;; Test 2
 (define test2-cf
   (λ ()
-    (if (equal? (f 10) (cf 10))
+    (if (equal? (f 10) (cf (λ (x) x) 10))
         0
         1)))
 
 ;;; Test 3
 (define test3-cf
   (λ ()
-    (if (equal? (f 25) (cf 25))
+    (if (equal? (f 25) (cf (λ (x) x) 25))
         0
         1)))
 
@@ -153,6 +207,23 @@
     (list (test1-cf)
           (test2-cf)
           (test3-cf))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ;;; PART 5 - grovel-add

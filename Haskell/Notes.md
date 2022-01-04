@@ -14,7 +14,22 @@ Haskell is Typed λ Calculus w/ cleanliness amg lots of syntactic sugar.
 - "fun", highly expressive
 - everythihng is Curried (automatically)
 
+<br>
 
+## How to Run
+To run haskell files, you need to be able to run `ghci` (Glasgow Haskell Compiler interactive) in Terminal.
+
+```haskell
+C:\Users\Name> ghci
+ghci> 
+```
+
+### Loading in files
+```haskell
+ghci> :l filename.hs
+```
+
+<br>
 
 ## List Functions
 ### `length`
@@ -78,14 +93,24 @@ ghci> maximum [5,21,63,45,58]
 <br>
 
 ### `product` and `sum`
-Self-explanatory.
+Takes a lsit and returns either the product or sum of all elements.
 ```haskell
-
+ghci> sum [5,2,1,6,3,2,5,7]  
+31  
+ghci> product [6,2,1,2]  
+24  
+ghci> product [1,2,5,6,7,9,2,0]  
+0   
 ```
 <br>
 
 ### `elem`
+Takes input element and a list. Returns boolean for if that element is in the list.
 ```haskell
+ghci> elem 4 [3,4,5,6]  
+True  
+ghci> elem 10 [3,4,5,6]  
+False  
 ```
 <br>
 
